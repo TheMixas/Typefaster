@@ -1,0 +1,30 @@
+@import './../../../styles/base.scss';
+.game-history{
+  height: 100%;
+  width: 100%;
+  grid-area: game-history;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  padding: 2rem;
+    box-sizing: border-box;
+  background-color: $primary-color;
+
+  overflow-y: scroll;
+  &__games{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    &__game{
+      width: 100%;
+      height: 5rem;
+      padding: 1rem;
+      box-sizing: border-box;
+        display: flex;
+      justify-content: space-around;
+      background-color: $foreground-color;
+    }
+  }
+}

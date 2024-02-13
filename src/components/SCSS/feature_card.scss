@@ -1,0 +1,36 @@
+@import './../../styles/base';
+.feature-card{
+  width: 32rem;
+    height: 15.5rem;
+  padding: 2rem;
+  box-sizing: border-box;
+    background-color: $border-color;
+
+  &__header{
+    display: flex;
+    gap:1rem;
+    &--text{
+      font-size: 2rem;
+      font-weight: 600;
+      color: $copy-color;
+    }
+    &--img{
+        width: 5rem;
+        height: 5rem;
+      object-fit: contain;
+      margin-left: auto;
+    }
+
+  }
+  &__subheader{
+    width: 100%;
+    height: fit-content;
+    &--text{
+        font-size: 1.12rem;
+        font-weight: 400;
+        color: $copy-color;
+
+    }
+  }
+
+}

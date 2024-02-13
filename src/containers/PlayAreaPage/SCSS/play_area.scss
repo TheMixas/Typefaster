@@ -1,0 +1,17 @@
+@import './../../../styles/mixins.scss';
+.play-area-page{
+  @include DefaultPage;
+  overflow: hidden;
+  &__game_modes{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 2rem;
+    width: 100%;
+    padding: 2rem;
+    box-sizing: border-box;
+   //space around
+    justify-content:space-around;
+  }
+
+}

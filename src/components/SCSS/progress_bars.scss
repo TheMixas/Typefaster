@@ -1,0 +1,12 @@
+.progress-bars{
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  height: fit-content;
+}
+.progress-container{
+  width: 100%;
+  transition: all 0.5s ease-in-out;
+  //position: absolute;
+
+}

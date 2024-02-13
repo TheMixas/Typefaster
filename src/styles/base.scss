@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Jua&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Lexend+Mega:wght@200;300;400;500;600;700&family=Poppins:ital,wght@0,100;0,200;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import './margins.scss';
+@import './widths.scss';
+// Colors
+$primary-color: #1134A6;
+$primary-color-light: #1642d4;
+$primary-color-dark: #0c2678;
+$primary-color-content: #becbf8;
+
+
+$secondary-color: #40a611;
+$secondary-color-light: #52d416;
+$secondary-color-dark: #2e780c;
+$secondary-color-content: #bef8be;
+
+$foreground-color: #20232d;
+$background-color: #15171e;
+$border-color: #353a4b;
+$copy-color: #fbfbfc;
+$code-light-color: #d2d5df;
+$code-lighter-color: #969db5;
+
+$gray-color: #b4b4b4;
+
+
+
+
+
+
+
+$warning-color: #a6a611;
+$error-color: #e91414;
+$error-color-dark: #780c0c;
+$error-color-light: #d41616;
+$success-color: #11a611;
+
+$success-color-content: #bef8be;
+$error-color-content: #f8bebe;
+$white-color: #ffffff;
+$black-color: #000000;
+
+// Font Families
+$primary-font: 'Poppins', sans-serif;
+$secondary-font: 'Poppins', sans-serif;

@@ -1,0 +1,20 @@
+@import './../../styles/base';
+.text-panel{
+    background-color: $foreground-color;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #000;
+    width: fit-content;
+    padding: 4rem;
+  box-sizing: border-box;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

@@ -1,0 +1,15 @@
+@import './../../styles/base.scss';
+.voting-board{
+  width: 100%;
+  height: fit-content;
+  background-color: $foreground-color;
+  padding: .5rem;
+  box-sizing: border-box;
+  display: flex;
+    flex-direction: column;
+  gap:1rem;
+  &--header{
+    text-align: center;
+  }
+
+}
