@@ -1,0 +1,66 @@
+// typography.scss
+
+@import 'base';
+
+// Typography
+body {
+  font-family: $primary-font;
+  color: $foreground-color;
+  background-color: $background-color;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $secondary-font;
+  color: $primary-color;
+  margin: 0;
+}
+span{
+  font-family: $secondary-font;
+  color: $primary-color;
+  margin: 0;
+}
+p {
+  font-family: $primary-font;
+  color: $copy-color;
+}
+
+a {
+  font-family: $primary-font;
+  color: $primary-color;
+  text-decoration: none;
+
+  &:hover {
+    color: $primary-color-light;
+  }
+}
+.secondary-bold{
+  font-family: $secondary-font;
+  font-weight: 700;
+  color: $secondary-color;
+}
+.white-tall{
+  font-family: $primary-font;
+  color: $white-color;
+  font-size: 2rem;
+  font-weight: 700;
+}
+.white-medium--thin{
+  font-family: $primary-font;
+  color: $white-color;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.special-text--1{
+    font-family: $primary-font;
+    color: $secondary-color;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.italic{
+  font-style: italic;
+}
+.gray{
+    color: $gray-color;
+}

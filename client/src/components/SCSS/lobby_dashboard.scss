@@ -1,0 +1,9 @@
+@import './../../styles/base';
+.lobby-dashboard{
+  background-color: $primary-color;
+  width: 20rem;
+  min-height: 23rem;
+  padding: 1rem 2rem;
+  box-sizing: border-box;
+  height: fit-content;
+}

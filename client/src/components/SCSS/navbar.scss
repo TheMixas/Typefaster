@@ -1,0 +1,39 @@
+@import '../../styles/base';
+.navbar{
+  display: flex;
+  gap:2rem;
+  padding:0 2rem;
+  box-sizing: border-box;
+  &__logo-box{
+    &--img{
+      width: 3.5rem;
+      height: 3.5rem;
+      border-radius: 50%;
+    }
+  }
+  &__links{
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    &--navlink{
+      font-size: 1.5rem;
+      font-weight: 500;
+      color:$primary-color-content;
+      text-decoration: none;
+      transition: all .2s;
+      &:hover{
+        color:$primary-color;
+      }
+      &:active{
+        color:$primary-color-dark;
+      }
+
+    }
+  }
+  &__auth-box{
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    margin-left: auto;
+  }
+}

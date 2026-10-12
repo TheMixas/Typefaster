@@ -1,0 +1,6 @@
+@import './../../../styles/mixins.scss';
+.home-page{
+  @include DefaultPage;
+  overflow: hidden;
+
+}

@@ -1,0 +1,46 @@
+@import './../../styles/base';
+.features-box{
+  width: 100%;
+  height: fit-content;
+  background-color: $foreground-color;
+  display: flex;
+  align-content: center;
+  align-items: center;
+    justify-content: center;
+  padding-bottom: 2rem;
+  box-sizing: border-box;
+  &__content{
+    width:80%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap:2rem;
+    &__text-box{
+      width: 100%;
+      height: fit-content;
+      display: flex;
+      gap:.5rem;
+      &--text1{
+        font-size: 3.5rem;
+        font-weight: 600;
+        color: $secondary-color;
+      }
+      &--text2{
+        font-size: 3.5rem;
+        font-weight: 600;
+        color: $secondary-color-content;
+      }
+    }
+    &__feature-box{
+      display: flex;
+        gap:2rem;
+      width: 100%;
+        height: fit-content;
+      @media only screen and (max-width: 900px) {
+        flex-direction: column;
+      }
+    }
+
+  }
+
+}

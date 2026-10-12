@@ -1,0 +1,17 @@
+.splash-texts{
+  width: 100%;
+    height: fit-content;
+  padding: .2rem;
+  box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  gap: .5rem;
+  &--title{
+
+  }
+  &--subtitle{
+
+  }
+}

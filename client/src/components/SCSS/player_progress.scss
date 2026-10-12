@@ -1,0 +1,33 @@
+.player-progress{
+  width: 100%;
+  transition: transform 0.5s ease-in-out;
+
+
+  &__player{
+    display: flex;
+    gap: .5rem;
+    &--name{
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #fff;
+    }
+    &--mascot{
+      width:3rem;
+      height:3rem;
+    }
+  }
+
+  &__bar-container{
+    display: flex;
+    &--bar{
+      width: 100%;
+    }
+    &--wpm{
+      white-space: nowrap;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #fff;
+    }
+  }
+
+}

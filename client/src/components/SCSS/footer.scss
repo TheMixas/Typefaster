@@ -1,0 +1,70 @@
+@import "../../styles/base.scss";
+.footer{
+  height: 10rem;
+  width: 100%;
+  padding: 2rem;
+  box-sizing: border-box;
+  &__row-1{
+    display: flex;
+    &__logo-box{
+      display: flex;
+      gap: 1rem;
+      &--img{
+        width: 4rem;
+        height: 4rem;
+      }
+      &--text{
+        font-size: 2rem;
+        font-weight: 700;
+        color: $primary-color-light;
+      }
+    }
+    &__links-box{
+      display: flex;
+      gap:2rem;
+      margin-left: auto;
+      &--link{
+        font-size: 1.5rem;
+        font-weight: 500;
+        color: $primary-color-content;
+        &:hover{
+          color: $primary-color-light;
+          cursor: pointer;
+          user-select: none;
+
+        }
+      }
+    }
+
+  }
+  &__row-2{
+    display: flex;
+    align-items: center;
+    &--copyrights{
+        font-size: 1.5rem;
+        font-weight: 500;
+        color: $primary-color-content;
+    }
+    &__social-media-box{
+      display: flex;
+        gap: 2rem;
+        margin-left: auto;
+      &--icon{
+        width: 2rem;
+        height: 2rem;
+        fill: $primary-color-content;
+        &:hover{
+          fill: $primary-color-light;
+            cursor: pointer;
+        }
+      }
+
+    }
+  }
+  &--line{
+    width: 100%;
+    height: 0.1rem;
+    background-color: $primary-color-light;
+    margin: .5rem 0;
+  }
+}
