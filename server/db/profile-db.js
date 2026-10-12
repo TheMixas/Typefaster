@@ -34,6 +34,7 @@ export const GetProfile = async (username) => {
       GROUP BY gs.user_id, g.text_theme
     ) as gd ON gd.user_id = u.id
     WHERE u.username = ?
+    GROUP BY u.id
   `;
 
   try {

@@ -81,7 +81,8 @@ authRouter.post('/login', async (req, res) => {
             return res.status(400).json({error: 'Invalid username or password'});
         }
         // Generate a JWT
-        const token = jwt.sign(user, process.env.JWT_SECRET, {expiresIn: '7d'});
+        // Only put what the app needs in the token (never the password hash).
+        const token = jwt.sign({id: user.id, username: user.username}, process.env.JWT_SECRET, {expiresIn: '7d'});
 
         let maxAge = 7 * 24 * 60 * 60 * 1000;
         setCookie(res, token, maxAge);
