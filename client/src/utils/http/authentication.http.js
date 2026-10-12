@@ -1,6 +1,7 @@
 import axios from 'axios'
+import {SERVER_URL} from "../../config";
 export const sendRegisterRequest = async (data) => {
-    const response = await axios.post('http://localhost:5000/api/auth/register', data,{
+    const response = await axios.post(`${SERVER_URL}/api/auth/register`, data,{
         withCredentials: true,
         headers: {
             'Content-Type': 'application/json',
@@ -13,7 +14,7 @@ export const sendRegisterRequest = async (data) => {
 }
 
 export const sendLoginRequest = async (data) => {
-    const response = await axios.post('http://localhost:5000/api/auth/login', data,{
+    const response = await axios.post(`${SERVER_URL}/api/auth/login`, data,{
         withCredentials: true,
         headers: {
             'Content-Type': 'application/json',
@@ -34,7 +35,7 @@ export const sendLoginRequest = async (data) => {
 }
 
 export const sendLogoutRequest = async () => {
-    const response = await axios.post('http://localhost:5000/api/auth/logout', {},{
+    const response = await axios.post(`${SERVER_URL}/api/auth/logout`, {},{
         withCredentials: true,
         headers: {
             'Content-Type': 'application/json',

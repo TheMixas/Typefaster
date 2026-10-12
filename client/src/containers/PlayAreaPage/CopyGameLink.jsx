@@ -1,8 +1,9 @@
 import './SCSS/copy_game_code.scss'
+
 export default function CopyGameLink({gameID}) {
     const handleCopyGameLink = () => {
         //copy game code to clipboard
-        navigator.clipboard.writeText(`${process.env.REACT_APP_SERVER_URL}/join-friend/${gameID}`).then(r =>
+        navigator.clipboard.writeText(`${window.location.origin}/join-friend/${gameID}`).then(r =>
             //note: turn into a toast
             alert("Game link copied to clipboard")
         )

@@ -12,13 +12,14 @@ import EncryptButton from "../../components/buttons/EncryptButton";
 import TextPanel from "../../components/TextPanel";
 import './../../styles/typography.scss'
 import CopyGameLink from "../PlayAreaPage/CopyGameLink";
+import {SERVER_URL} from "../../config";
 
 
 
 export default function GameaArenaPage({}) {
     //game types : quick, custom, createCustom
     const {socket,emitEvent,handleClientWantsPlay,handleClientWantsStartGame
-    } = useSocket('http://localhost:5000', (socket)=>{
+    } = useSocket(SERVER_URL, (socket)=>{
         switch (gameType) {
             case 'quick':
                 handleClientWantsToQuickPlay(socket)
