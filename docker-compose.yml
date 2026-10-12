@@ -1,0 +1,32 @@
+# Run everything locally: docker compose up --build  ->  http://localhost:5000
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_USER: typefaster
+      DB_PASSWORD: ${DB_PASSWORD:-typefaster}
+      DB_DATABASE: typefaster
+      JWT_SECRET: ${JWT_SECRET:-local-dev-secret}
+      ALLOWED_ORIGINS: ${ALLOWED_ORIGINS:-http://localhost:5000}
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.4
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: typefaster
+      MYSQL_USER: typefaster
+      MYSQL_PASSWORD: ${DB_PASSWORD:-typefaster}
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+    command: ["--performance-schema=OFF", "--innodb-buffer-pool-size=32M", "--mysqlx=OFF"]
+    volumes:
+      - dbdata:/var/lib/mysql
+
+volumes:
+  dbdata:
