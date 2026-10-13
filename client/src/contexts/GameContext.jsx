@@ -14,7 +14,7 @@ export const GameContextProvider = ({children}) => {
     const [globalCurrentWordIndex, setGlobalCurrentWordIndex] = useState(0)
 
     //fetch this from the server
-    const [textThemes, setTextThemes] = useState(["Default", "Psychology", 'Javascript'])
+    const [textThemes, setTextThemes] = useState(["Default", "Psychology", "Programming", "Space"])
 
     //SET THIS WHEN WE VOTE FOR A THEME
     const [playerChosenTheme, setPlayerChosenTheme] = useState('Default') // genre

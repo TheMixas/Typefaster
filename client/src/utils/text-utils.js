@@ -21,7 +21,8 @@ export const  ChopSentence = (sentence) => {
             word += sentence[i]
         }
     }
-    choppedSentence.push(word)
-    console.log("text-utils: choopredSentence: ",choppedSentence)
+    // No empty last word when the text ends with a delimiter, otherwise the race
+    // waits for a word that can never be typed.
+    if (word) choppedSentence.push(word)
     return choppedSentence
 }

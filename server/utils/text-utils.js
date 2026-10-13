@@ -1,4 +1,3 @@
-import {text} from "express";
 import texts from "../texts.js";
 
 /**
@@ -12,19 +11,21 @@ import texts from "../texts.js";
  * ChopSentence('Hello, world!')
  */
 export const  ChopSentence = (sentence) => {
+    if(!sentence) return []
     let choppedSentence = []
     let word = ""
     for (let i = 0; i < sentence.length; i++) {
         if (sentence[i] === " " || sentence[i] === "," || sentence[i] === "." || sentence[i] === "!" || sentence[i] === "?") {
             word += sentence[i]
             choppedSentence.push(word)
-            console.log("text-utils: word: ",word)
             word = ""
         } else {
             word += sentence[i]
         }
     }
-    choppedSentence.push(word)
+    // No empty last word when the text ends with a delimiter, otherwise the race
+    // waits for a word that can never be typed.
+    if (word) choppedSentence.push(word)
     return choppedSentence
 }
 export const GetRandomTextBasedOnTheme = (theme) => {

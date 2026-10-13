@@ -48,11 +48,12 @@ export default function PlayAreaPage({}){
         <div className="play-area-page">
             <HeroMoving/>
             <div className="play-area-page__game_modes">
-                <PrimaryInfoContainer title={"Quick"} buttonTitle={'Race!'} _onClick={handleJoinQuickGame}/>
-                <PrimaryInfoContainer title={"Friends"} buttonTitle={'Race!'} _onClick={handleCreateCustomGame}/>
+                <PrimaryInfoContainer title={"Quick"} text={"Jump into a public lobby with whoever is online."} buttonTitle={'Race!'} _onClick={handleJoinQuickGame}/>
+                <PrimaryInfoContainer title={"Friends"} text={"Make a private lobby and send the code to your friends."} buttonTitle={'Race!'} _onClick={handleCreateCustomGame}/>
                 <SecondaryInputContainer
                     customClass={'grid-column-1-to-2'}
                     title={"Join A Game"}
+                    text={"Got a code from a friend? Paste it here."}
                     buttonTitle={'Race!'}
                     inputPlaceholder={"Enter Code"}
                     inputType={"text"}

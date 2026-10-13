@@ -5,11 +5,18 @@ import {ChopSentence} from "../utils/text-utils";
 import {GameContext} from "../contexts/GameContext"; // import styles
 import './SCSS/editor.scss'
 
+// Quill turns "- " or "1. " at the start of a line into a list, which made words
+// starting with "-" impossible to type.
+const editorModules = {
+    toolbar: false,
+    keyboard: {bindings: {'list autofill': null}},
+};
+
 function MyEditor() {
     let backgroundColor = '#353a4b';
     const quillRef = useRef(); // Create a ref to store the Quill instance
     // const correctText = 'The correct text goes here';
-    const {setGlobalCurrentWordIndex, setCanType,canType,gameText,setMistakes,mistakes} = React.useContext(GameContext);
+    const {setGlobalCurrentWordIndex, globalCurrentWordIndex, setCanType,canType,gameText,setMistakes,mistakes} = React.useContext(GameContext);
 
     //Array to store the correct text split into words
     const [splitCorrectText, setSplitCorrectText] = useState(()=>{
@@ -53,73 +60,53 @@ function MyEditor() {
             quill.focus();
         }
     }, [canType]);
+    // A new game resets the global index to 0, so reset the local one too
+    // (the text can be the same as last round, so gameText alone isn't enough).
     useEffect(() => {
+        if (globalCurrentWordIndex === 0) setCurrentWordIndex(0);
+    }, [globalCurrentWordIndex]);
 
-        const quill = quillRef.current.getEditor(); // Get the Quill instance\
+    useEffect(() => {
+        if (splitCorrectText.length > 0 && currentWordIndex >= splitCorrectText.length) {
+            setCanType(false);
+        }
+    }, [currentWordIndex, splitCorrectText]);
+
+    useEffect(() => {
+        const quill = quillRef.current.getEditor(); // Get the Quill instance
         quill.focus();
-        quill.on('text-change', function(delta, oldDelta, source) {
+
+        const handleTextChange = (delta, oldDelta, source) => {
             if (source !== 'user') return; // If the change was triggered by Quill's API, ignore it
-            const text = quill.getText();
-            let foundMistake = false;
-            for (let i = 0; i < text.length-1; i++) {
-                console.log("MyEditor.jsx: current word to type: ",splitCorrectText[currentWordIndex])
-                //Check if the current character is a mistake
+            const word = splitCorrectText[currentWordIndex];
+            if (word === undefined) return;
 
-                console.log("MyEditor.jsx: Current character being checked (i): ", i, " | Current character in text:|", text[i], "| Corresponding character in correct word:|", splitCorrectText[currentWordIndex][i],"| Current wordIndex: ",currentWordIndex,"| Current word to type: ",splitCorrectText[currentWordIndex],"|");
+            // getText() always ends with a newline, so drop it
+            const typed = quill.getText().slice(0, -1);
 
-                if (text[i] !== splitCorrectText[currentWordIndex][i]) {
-                    console.log("MyEditor.jsx: mistake found")
-                    // quill.formatText(i, text.length - i, 'background', '#a61111');
-                    //change input box to red
-                    foundMistake = true;
-                    setEditorBackground('red'); // Add this line
-                }
-                //Check if last character contains a mistake
-                // console.log("MyEditor.jsx: checking if last character contains a mistrake")
-                // console.log("MyEditor.jsx: checking last character, i: ",i," text.length-1: ",text.length-1," text[i]: ",text[i]," splitCorrectText[currentWordIndex][i]: ",splitCorrectText[currentWordIndex][i])
-                // if(i === text.length-2 && text[i] !== splitCorrectText[currentWordIndex][i]){
-                //     handleMistake(text[i]);
-                // }
+            // Red background while what's typed isn't a prefix of the current word
+            setEditorBackground(word.startsWith(typed) ? backgroundColor : 'red');
+
+            if (typed === word) {
+                const next = currentWordIndex + 1;
+                setCurrentWordIndex(next);
+                setGlobalCurrentWordIndex(next);
+                quill.deleteText(0, typed.length);
             }
-            if(!foundMistake){
-                setEditorBackground(backgroundColor); // Add this line
-            }
+        };
 
-            //check if currentText = splitCorrectText[index]
-
-            if(splitCorrectText[currentWordIndex] === undefined){
-                return;
-            }
-
-            //Slices off the last character of the text because getText() adds a newline character at the end
-            // console.log("MyEditor.jsx: Current text in the editor sliced by 1:", text.slice(0, -1), "|Current word to be typed:", splitCorrectText[currentWordIndex],"|");
-
-            // console.log("MyEditor.jsx: Current text equals current word to be typed:", text.slice(0, -1) === splitCorrectText[currentWordIndex]);
-
-            if(text.slice(0, -1) === splitCorrectText[currentWordIndex]){
-                // console.log("MyEditor.jsx: Correct word typed");
-                //set local current word index to be used in this component
-                setCurrentWordIndex(()=>{
-                    //set global current word index to be used in other components
-                    setGlobalCurrentWordIndex(currentWordIndex + 1 );
-                    return currentWordIndex + 1});
-
-
-                // delete .length-1 to keep focus on the editor
-                quill.deleteText(0, text.length-1);
-            }
-            if(currentWordIndex === splitCorrectText.length){
-                setCanType(false);
-            }
-
-        });
+        quill.on('text-change', handleTextChange);
+        // Remove this handler before the next one is added. Without this, old handlers
+        // with an old word index kept running and a repeated word (e.g. "his") sent
+        // progress backwards.
+        return () => quill.off('text-change', handleTextChange);
     }, [splitCorrectText, currentWordIndex]);
 
     return (
         <ReactQuill
                     ref={quillRef}
                     className={"editor"}
-                    modules={{ toolbar: false }}
+                    modules={editorModules}
                     style={{backgroundColor: editorBackground}}
 
         />

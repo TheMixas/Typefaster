@@ -10,6 +10,7 @@ export default function HomePage(){
         <div className={"home-page"}>
             <HeroMoving/>
             <PrimaryInfoContainer
+                text={"Real-time typing races in the browser. Join a lobby, vote on what to type and race whoever else is in it."}
                 buttonTitle={"Race Now!"}
                 customClass={'margin-half-screen-top width-80-rem margin-left-10-rem'}
                 _onClick={()=>{
