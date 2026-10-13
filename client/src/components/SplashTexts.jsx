@@ -1,9 +1,12 @@
 import './SCSS/splash_texts.scss'
 import {useContext, useEffect, useState} from "react";
 import {GameContext} from "../contexts/GameContext";
+const WAITING_SUBTITLE = ''
+const seconds = (n) => `${n} second${n === 1 ? '' : 's'}`
+
 export default function SplashTexts({}) {
     const [title,setTitle] = useState('Waiting for players...')
-    const [subtitle,setSubtitle] = useState('hi ;)')
+    const [subtitle,setSubtitle] = useState(WAITING_SUBTITLE)
     const {gameState, themeVotingTime,countdownTime, finishedToLobbyTime} = useContext(GameContext)
     const [countdown,setCountdown] = useState(10)
     const [enabled,setEnabled] = useState(true)
@@ -15,7 +18,7 @@ export default function SplashTexts({}) {
         switch (gameState) {
             case 'WaitingState':
                 setTitle('Waiting for players...')
-                setSubtitle('hi ;)')
+                setSubtitle(WAITING_SUBTITLE)
                 break;
             case 'CountDownState':
                 //stop inverval
@@ -38,6 +41,7 @@ export default function SplashTexts({}) {
 
     const handleThemeVoteCountdown = () => {
         setTitle('Vote for a theme')
+        setSubtitle(`Voting ends in ${seconds(themeVotingTime)}...`)
         setCountdown(themeVotingTime-1)
         //every second, decrease the countdown by 1
             setSplashInterval(setInterval(() => {
@@ -48,7 +52,7 @@ export default function SplashTexts({}) {
                     clearInterval(interval)
                     return prevCountdown;
                 }
-                setSubtitle(`Voting ends in ${prevCountdown} seconds...`)
+                setSubtitle(`Voting ends in ${seconds(prevCountdown)}...`)
                 return prevCountdown - 1;
             })
         }, 1000))
@@ -57,6 +61,7 @@ export default function SplashTexts({}) {
 
     const handleCountdown = () => {
         setCountdown(countdownTime-1)
+        setTitle(`Game starts in ${seconds(countdownTime)}...`)
         setSubtitle('Get ready!')
         //every second, decrease the countdown by 1
         setSplashInterval(setInterval(() => {
@@ -67,7 +72,7 @@ export default function SplashTexts({}) {
                     clearInterval(interval)
                     return prevCountdown;
                 }
-                setTitle(`Game starts in ${prevCountdown} seconds...`)
+                setTitle(`Game starts in ${seconds(prevCountdown)}...`)
                 return prevCountdown - 1;
             })
         }, 1000))
@@ -76,6 +81,7 @@ export default function SplashTexts({}) {
     const handleTransitionCountdown = () => {
         setCountdown(finishedToLobbyTime-1)
         setTitle('Well done!')
+        setSubtitle(`Next race in ${seconds(finishedToLobbyTime)}...`)
         //every second, decrease the countdown by 1
         setSplashInterval(setInterval(() => {
             //decrease the countdown by 1
@@ -85,7 +91,7 @@ export default function SplashTexts({}) {
                     clearInterval(interval)
                     return prevCountdown;
                 }
-                setSubtitle(`The game restarts in ${prevCountdown} seconds...`)
+                setSubtitle(`Next race in ${seconds(prevCountdown)}...`)
                 return prevCountdown - 1;
             })
         }, 1000))

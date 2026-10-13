@@ -204,7 +204,8 @@ function playerJoinGame(socket, game) {
     socket.emit(Events.SERVER_JOINED_GAME, { gameUID: game.roomUID,
         players: gamePlayers, gameText: game.getGameText(),
         state: game.getCurrentStateName(), themeVotingTime: THEME_SELECTION_TIME,countdownTime: COUNTDOWN_TIME,
-        finishedToLobbyTime: FINISHED_TRANSITION_TO_LOBBY_TIME, isPrivateLobby: game.isPrivate, isLobbyLeader: game.creatorSocketID === socket.id
+        finishedToLobbyTime: FINISHED_TRANSITION_TO_LOBBY_TIME, isPrivateLobby: game.isPrivate, isLobbyLeader: game.creatorSocketID === socket.id,
+        you: player.getInformation()
     });
 
 }

@@ -28,12 +28,12 @@ function TextSummary() {
         const quill = quillRef.current.getEditor(); // Get the Quill instance
         //color the text green if it is correct based on split text and globalCurrentWordIndex
         const combinedLength = splitText.slice(0, globalCurrentWordIndex).reduce((totalLength, word) => totalLength + word.length, 0);
-        quill.formatText(0, combinedLength, 'background', '#40a611');
+        quill.formatText(0, combinedLength, 'color', '#5ee04a');
 
     }, [globalCurrentWordIndex]);
 
     return (
-        <ReactQuill  theme="snow" defaultValue={text ?? ""} ref={quillRef} modules={{toolbar: false}} readOnly={true}/>
+        <ReactQuill className="text-summary" theme="snow" defaultValue={text ?? ""} ref={quillRef} modules={{toolbar: false}} readOnly={true}/>
     );
 }
 

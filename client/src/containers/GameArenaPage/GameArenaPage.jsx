@@ -70,7 +70,7 @@ export default function GameaArenaPage({}) {
     const getStartHelpText = () => {
         switch (gameType) {
             case 'quick':
-                return "Can`t wait to start the game? Click to start a single-player match!"
+                return "Press START to race on your own, or wait for someone to join."
                 break;
             case 'custom':
                 return "Waiting for the game leader to start the game..."

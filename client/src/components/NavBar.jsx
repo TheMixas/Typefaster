@@ -24,8 +24,6 @@ export default function NavBar() {
                 <NavLink className="navbar__links--navlink" to={"/"}>Home</NavLink>
                 <NavLink className="navbar__links--navlink" to={"/playarea"}>Play area</NavLink>
                 <NavLink className="navbar__links--navlink" to={"/profile"}>Profile</NavLink>
-                <NavLink className="navbar__links--navlink" to={"/"}>Leaderboard</NavLink>
-                <NavLink className="navbar__links--navlink" to={"/"}>Help</NavLink>
             </div>
             <div className="navbar__auth-box">
                 {

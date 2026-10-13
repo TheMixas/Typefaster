@@ -1,7 +1,7 @@
 import {IsNullOrUndefined, IsNumber} from "../utils/validation-utils";
 
 export default class Player {
-    constructor(socketID, name,progress = 0,wpm = 2, procentageProgress = 0) {
+    constructor(socketID, name,progress = 0,wpm = 0, procentageProgress = 0) {
         if(IsNullOrUndefined(socketID)){
             throw new Error("SocketID cannot be null or undefined");
         }

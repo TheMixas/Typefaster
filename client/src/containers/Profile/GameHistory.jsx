@@ -1,5 +1,10 @@
 import './SCSS/game_history.scss'
 import icon from './../../images/mascot-1024.png'
+const ordinal = (n) => {
+    const s = ['th', 'st', 'nd', 'rd'], v = n % 100;
+    return n + (s[(v - 20) % 10] || s[v] || s[0]);
+}
+
 export default function GameHistory({games=[{
     theme: "Default",
     position: 1,
@@ -68,8 +73,8 @@ export default function GameHistory({games=[{
                             <div key={index} className="game-history__games__game">
                                 <img src={`${icon}`} alt="" className="game-history__games__game--icon"/>
                                 <span className="white-tall game-history__games__game--theme">{game.theme}</span>
-                                <span className="white-tall game-history__games__game--position">{game.position}</span>
-                                <span className="white-tall game-history__games__game--wpm">{game.wpm} WPM</span>
+                                <span className="white-tall game-history__games__game--position">{ordinal(game.position)}</span>
+                                <span className="white-tall game-history__games__game--wpm">{Math.round(game.wpm)} WPM</span>
                             </div>
                         )
                     })

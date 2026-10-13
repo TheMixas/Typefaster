@@ -1,50 +1,35 @@
 # Typefaster
 
-**A real-time multiplayer typing race.** Join a lobby, vote on the text theme, and race other players live, watching everyone's progress bars move as they type.
+**A real-time multiplayer typing race.** Join a lobby, vote on what to type, and race other people live.
 
-### 🔴 [Live demo → typefaster-gustas.duckdns.org](https://typefaster-gustas.duckdns.org)
+### [Live demo → typefaster-gustas.duckdns.org](https://typefaster-gustas.duckdns.org)
 
-**Try it:** open the site in two browser tabs (or send the invite link to a friend) and press **Play** in both. You can also start a single-player race on your own. Sign up to have your results saved to your profile.
+**Try it:** open the site in two browser tabs and press **Race Now!** in both, or press **START** in a lobby to race on your own. Log in and your results are saved to your profile.
 
-![Typefaster](docs/screenshot.png)
+![Two players racing](docs/race.gif)
 
 ## Features
 
-- **Live multiplayer races over Socket.IO.** The server runs the game loop and streams every player's position and WPM several times a second.
-- **Matchmaking and private lobbies.** *Play* joins the fullest public lobby; private games are shared with an invite link.
-- **Theme voting** before each race decides which kind of text you type.
-- **Game state machine** on the server: waiting → theme voting → countdown → in progress → finished → back to lobby.
-- **Accounts and stats.** JWT in an HttpOnly cookie; results go to MySQL, and profiles show games played, win rate, average WPM and favourite theme, with charts.
-- Guests can play without an account; their results just aren't saved.
+- **Live races.** Every player's progress bar and WPM update several times a second while you type.
+- **Lobbies.** *Race Now!* puts you in the fullest public lobby. Private lobbies get an invite link for friends.
+- **Theme voting** before each race: classic lines, psychology, programming quotes or space.
+- **Accounts and stats.** Average WPM, win rate, favourite theme and your race history on your profile.
+- Guests can play without an account.
+
+## How it works
+
+- **The server runs the game.** Each lobby is a state machine (waiting → theme vote → countdown → race → results) built from one class per state in [`server/game/GameState.js`](server/game/GameState.js). Timers live on the server, so every player sees the same countdown.
+- **Clients only report progress.** The browser sends its current word index over Socket.IO. The server works out each player's percentage, WPM (from its own clock) and position, and broadcasts them to the lobby every 300 ms.
+- **Results go to MySQL** when a race ends. The schema is applied automatically on startup ([`server/db/migrate.js`](server/db/migrate.js)).
 
 ## Tech stack
 
 | | |
 |---|---|
-| Client | React 18, React Router, Socket.IO client, Sass, Google Charts |
-| Server | Node.js, Express, Socket.IO, JWT, bcrypt |
-| Database | MySQL 8 (`server/db/schema.sql`, applied automatically on startup) |
-| Deployment | Docker multi-stage build, Docker Compose, Caddy (automatic HTTPS) |
-
-## Project structure
-
-```
-typefaster/
-├── client/                 # React app (Create React App)
-│   └── src/
-│       ├── containers/     # pages: home, play area, game arena, profile
-│       ├── hooks/useSocket.js
-│       └── sockets/        # handlers for server events
-├── server/
-│   ├── index.js            # HTTP + Socket.IO server
-│   ├── socket.js           # socket events: play, join, vote, progress
-│   ├── gameManager.js      # lobbies / matchmaking
-│   ├── game/               # Game, Player and the game-state machine
-│   ├── routers/            # REST: auth, profiles, leaderboards
-│   └── db/                 # MySQL queries, schema.sql, migrate.js
-├── Dockerfile              # builds the client, then the server that serves it
-└── docker-compose.yml
-```
+| Client | React 18, React Router, Socket.IO client, Quill, Sass |
+| Server | Node.js, Express, Socket.IO, JWT (HttpOnly cookie), bcrypt |
+| Database | MySQL 8 |
+| Deployment | Docker multi-stage build, Docker Compose, Caddy (HTTPS) on an Azure VM |
 
 ## Run it locally
 
@@ -56,7 +41,7 @@ cd Typefaster
 docker compose up --build
 ```
 
-Open http://localhost:5000. Open it in two tabs to race yourself.
+Open http://localhost:5000 in two tabs to race yourself.
 
 <details>
 <summary><b>Development with hot reload</b></summary>
@@ -71,6 +56,28 @@ cd client && npm install && npm start   # http://localhost:3000, talks to :5000
 ```
 </details>
 
+<details>
+<summary><b>Project structure</b></summary>
+
+```
+typefaster/
+├── client/                 # React app (Create React App)
+│   └── src/
+│       ├── containers/     # pages: home, play area, game arena, profile
+│       ├── hooks/useSocket.js
+│       └── sockets/        # handlers for server events
+├── server/
+│   ├── index.js            # HTTP + Socket.IO server
+│   ├── socket.js           # socket events: play, join, vote, progress
+│   ├── gameManager.js      # lobbies and matchmaking
+│   ├── game/               # Game, Player and the game-state machine
+│   ├── routers/            # REST: auth, profiles, leaderboards
+│   └── db/                 # MySQL queries, schema.sql, migrate.js
+├── Dockerfile              # builds the client, then the server that serves it
+└── docker-compose.yml
+```
+</details>
+
 ## Author
 
-**Gustas Rove** ([TheMixas](https://github.com/TheMixas)). See also [Ryklys](https://github.com/TheMixas/ryklys), a live-streaming platform with a C++ backend.
+**Gustas Rove** ([TheMixas](https://github.com/TheMixas)). I built Typefaster in 2024 and came back to it in 2026 to dockerise and deploy it. See also [Ryklys](https://github.com/TheMixas/ryklys), a live-streaming platform with a C++ backend, and [Gossip](https://github.com/TheMixas/Gossip), a social network with real-time chat.

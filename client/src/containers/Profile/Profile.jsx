@@ -55,7 +55,7 @@ export default function Profile({}) {
         <div className="profile__body">
             <div className="profile__body__overview">
                 <span className="profile__body__overview--title white-tall">{`WPM: `}<span
-                    className={"secondary-bold"}>{`${profileData.wpm}`}</span></span>
+                    className={"secondary-bold"}>{`${Math.round(Number(profileData.wpm) || 0)}`}</span></span>
                 <span className="profile__body__overview--title white-tall">{`WinRate: `}<span
                     className={"secondary-bold"}>{`${Math.round(Number(profileData.winRate))}%`}</span></span>
 

@@ -100,12 +100,14 @@ export default function useSocket(serverURL, next) {
         //reset player progress
         let _player = player;
         _player.updateProgress(0);
+        _player.updateWPM(0);
         setPlayer(_player);
         //reset lobby progress
         setLobbyPlayers(prevPlayers => {
             const updatedPlayers = { ...prevPlayers };
             Object.keys(updatedPlayers).forEach((key) => {
                 updatedPlayers[key]?.updateProgress(0);
+                updatedPlayers[key]?.updateWPM(0);
             });
             return updatedPlayers;
         })
@@ -163,6 +165,11 @@ export default function useSocket(serverURL, next) {
                 handleJoinedGame(socket,data,setGameID,setLobbyPlayers,
                     setGameState,setThemeVotingTime,
                     setCountdownTime, setFinishedToLobbyTime,setIsPrivateLobby,setIsLobbyLeader);
+                // Show our real username (or guest name) instead of a placeholder
+                if (data.you?.name && player) {
+                    player.name = data.you.name;
+                    setPlayer(player);
+                }
             });
             socket.on(Events.SERVER_RESET_GAME, (data) => {
                 console.log('RECEIVED SERVER_RESET_GAME');

@@ -133,7 +133,8 @@ export class InProgressState extends GameState {
                 playerPositions[player.id] = {progress:percentage,wpm};
 
             }else{
-                playerPositions[player.id] = {progress:percentage};
+                // Finished: keep the last WPM so it gets saved with the result
+                playerPositions[player.id] = {progress:percentage, wpm: this.game.getPlayerPositions()[player.id]?.wpm ?? 0};
             }
             i++;
         }

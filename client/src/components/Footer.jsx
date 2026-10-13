@@ -10,31 +10,17 @@ export default function Footer(){
                     <span className="footer__row-1__logo-box--text">TYPEFASTER</span>
                 </div>
                 <div className="footer__row-1__links-box">
-                    <div className="footer__row-1__links-box--link">About</div>
-                    <div className="footer__row-1__links-box--link">Contact</div>
-                    <div className="footer__row-1__links-box--link">Privacy Policy</div>
-                    <div className="footer__row-1__links-box--link">Terms of Service</div>
+                    <a className="footer__row-1__links-box--link" href="https://github.com/TheMixas/Typefaster">Source code</a>
                 </div>
             </div>
             <div className="footer--line"></div>
             <div className="footer__row-2">
                 <span className="footer__row-2--copyrights">
-                    &copy; 2021 TypeFaster
+                    Made by Gustas Rove
                 </span>
-                <div className="footer__row-2__social-media-box">
-                    <div className="footer__row-2__social-media-box--icon">
-                        <TfiGithub className="footer__row-2__social-media-box--icon" />
-                    </div>
-                    <div className="footer__row-2__social-media-box--icon">
-                        <TfiGithub className="footer__row-2__social-media-box--icon" />
-                    </div>
-                    <div className="footer__row-2__social-media-box--icon">
-                        <TfiGithub className="footer__row-2__social-media-box--icon" />
-                    </div>
-                    <div className="footer__row-2__social-media-box--icon">
-                        <TfiGithub className="footer__row-2__social-media-box--icon" />
-                    </div>
-                </div>
+                <a className="footer__row-2__social-media-box" href="https://github.com/TheMixas" aria-label="GitHub">
+                    <TfiGithub className="footer__row-2__social-media-box--icon" />
+                </a>
             </div>
         </div>
     )

@@ -1,3 +1,15 @@
-//.ql-container {
-//  border: none !important;
-//}
+// The text to type, above the input box
+.text-summary {
+  .ql-container {
+    font-family: inherit;
+    font-size: 22px;
+    border: none !important;
+  }
+  .ql-editor {
+    line-height: 1.6;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 0 1.5rem;
+    text-align: left;
+  }
+}

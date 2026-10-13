@@ -2,6 +2,15 @@
   color: #000000;
   border-radius: 7px;
   min-height: 2.5rem;
-  min-width: 70rem;
+  width: min(70rem, 90vw);
   font-size: 3rem;
+
+  .ql-container {
+    font-family: inherit;
+    font-size: 22px;
+    border: none !important;
+  }
+  .ql-editor {
+    color: #f2f2f2;
+  }
 }
