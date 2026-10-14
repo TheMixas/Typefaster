@@ -77,7 +77,3 @@ typefaster/
 └── docker-compose.yml
 ```
 </details>
-
-## Author
-
-**Gustas Rove** ([TheMixas](https://github.com/TheMixas)). I built Typefaster in 2024 and came back to it in 2026 to dockerise and deploy it. See also [Ryklys](https://github.com/TheMixas/ryklys), a live-streaming platform with a C++ backend, and [Gossip](https://github.com/TheMixas/Gossip), a social network with real-time chat.
